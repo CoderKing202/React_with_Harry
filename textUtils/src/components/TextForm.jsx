@@ -16,6 +16,9 @@ export default function TextForm(props) {
     //  console.log('OnChange')
       setText(event.target.value)
     }
+    const handleClear=()=>{
+      setText('')
+    }
     //text = "new text"// Wrong way to change the state
    // setText("new text")// Correct way to change the state
   return (
@@ -28,6 +31,7 @@ export default function TextForm(props) {
   </div>
   <button className="btn btn-primary mx-1" onClick = {handleUpClick}>Convert To Uppercase</button>
   <button className="btn btn-primary mx-1" onClick = {handleLoClick}>Convert To Lowercase</button>
+  <button className="btn btn-primary mx-1" onClick = {handleClear}>Clear Text</button>
   </div>
   <div className="container my-3">
     <h2>Your text summary</h2>
