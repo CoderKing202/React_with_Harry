@@ -5,12 +5,14 @@ export default function TextForm(props) {
     const handleUpClick = ()=>{
       //console.log('Uppercase was clicked')
       let newText = text.toUpperCase()
+      props.showAlert("Converted to upper case","success")
       setText(newText)
     }
     const handleLoClick = ()=>{
       //console.log('Uppercase was clicked')
       let newText = text.toLowerCase()
       setText(newText)
+      props.showAlert("Converted to lower case","success")
     }
     const handleOnChange = (event)=>{
     //  console.log('OnChange')
@@ -18,16 +20,18 @@ export default function TextForm(props) {
     }
     const handleClear=()=>{
       setText('')
+      props.showAlert("Text Cleared","success")
     }
     const handleCopy = ()=>{
       const text = document.getElementById("myBox")
       text.select()
-      
+      props.showAlert("Text Copied to Clipboard","success")
       navigator.clipboard.writeText(text.value)
     }
     const handleExtraSpaces = ()=>{
       let newText = text.split(/[ ]+/)
       setText(newText.join(" "))
+      props.showAlert("Extra Spaces removed","success")
     }
     //text = "new text"// Wrong way to change the state
    // setText("new text")// Correct way to change the state
