@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/favicon.ico'
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 import Navbar from './components/Navbar'
 import TextForm from './components/TextForm'
 import About from './components/About'
 import Alert from './components/Alert'
+const Test =()=>{
+  return(<h1>Hello</h1>)
+}
 
 function App() {
   const [mode,setMode] = useState('light')//Whether dark mode is enabled or not
@@ -42,13 +45,21 @@ function App() {
 
   return (
  <>
+ <Router>
 <Navbar title={"TextUtils"} mode={mode} toggleMode={toggleMode} />
 <Alert alert={alert}/>
 <div className="container my-3">
-<TextForm heading ="Enter the text to analyze below" mode={mode} 
-showAlert={showAlert}/>
+<Routes>
+  <Route path='/'element={<TextForm heading="Enter the text to analyze below" mode={mode} 
+showAlert={showAlert}/>}/> 
+  <Route path="/about" element={<About/>}/>
 {/* <About/> */}
+</Routes>
 </div>
+</Router>
+{/* /** /users --> Component 1
+ /users/home --> -->  Component2
+ mybe it is not used anymore */ }
  </>
   )
 }
