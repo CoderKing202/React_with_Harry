@@ -26,6 +26,7 @@ export default function TextForm(props) {
       const text = document.getElementById("myBox")
       text.select()
       props.showAlert("Text Copied to Clipboard","success")
+      document.getSelection().removeAllRanges()
       navigator.clipboard.writeText(text.value)
     }
     const handleExtraSpaces = ()=>{
@@ -38,24 +39,24 @@ export default function TextForm(props) {
   return (
     <>
     <div className='container' style={{color:props.mode==="light"?"#042743":"white"}}>
-      <h1>{props.heading}</h1>
+      <h1 className='mb-4'>{props.heading}</h1>
 <div className="mb-3" style={{color:props.mode==="light"?"#042743":"white"}}>
 <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"
-style={{backgroundColor:props.mode==="light"?"white":"grey", color:props.mode==="light"?"black":"white"}}>
+style={{backgroundColor:props.mode==="light"?"white":"#13466e", color:props.mode==="light"?"black":"white"}}>
 </textarea>
   </div>
-  <button className="btn btn-primary mx-1" onClick = {handleUpClick}>Convert To Uppercase</button>
-  <button className="btn btn-primary mx-1" onClick = {handleLoClick}>Convert To Lowercase</button>
-  <button className="btn btn-primary mx-1" onClick = {handleClear}>Clear Text</button>
-  <button className="btn btn-primary mx-1" onClick = {handleCopy}>Copy Text</button>
-  <button className="btn btn-primary mx-1" onClick = {handleExtraSpaces}>Handle Extra Spaces</button>
+  <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick = {handleUpClick}>Convert To Uppercase</button>
+  <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick = {handleLoClick}>Convert To Lowercase</button>
+  <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick = {handleClear}>Clear Text</button>
+  <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick = {handleCopy}>Copy Text</button>
+  <button disabled={text.length === 0} className="btn btn-primary mx-1 my-1" onClick = {handleExtraSpaces}>Handle Extra Spaces</button>
   </div>
   <div className="container my-3" style={{color:props.mode==="light"?"#042743":"white"}}>
     <h2>Your text summary</h2>
-    <p>{ text.split(" ").length } words, {text.length} characters</p>
-    <p>{ 0.008 * text.split(" ").length } Minutes read</p>
+    <p>{ text.split(" ").filter((element)=>{return element.length!==0 }).length } words, {text.length} characters</p>
+    <p>{ 0.008 * text.split(" ").filter((element)=>{return element.length!==0 }).length } Minutes read</p>
     <h2>Preview</h2>
-    <p>{text.length === 0?text:"Enter something in the text box above to preview it here" }</p>
+    <p>{text.length === 0?"Nothing to Preview":text }</p>
   </div>
   </>
   )

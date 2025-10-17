@@ -21,24 +21,16 @@ function App() {
     },1500)
   }
 
-  const toggleMode = ()=>{
+  const toggleMode = (cls)=>{
+    console.log(cls)
   if(mode === "light"){
     setMode("dark")
     document.body.style.backgroundColor="#042743"
-    document.title = "TextUtils - Dark Mode"
-    // setInterval(()=>{
-    //   document.title = "TextUtils is amazing"
-    // },2000)
-    // setInterval(()=>{
-    //   document.title = "Install TextUtils now"
-    // },1500)
     showAlert("Dark mode has been enabled", "success")
-
   } 
   else{
     setMode("light")
     document.body.style.backgroundColor="white"
-    document.title = "TextUtils - Light Mode"
     showAlert("Light mode has been enabled", "success")
   } 
   }
@@ -50,16 +42,14 @@ function App() {
 <Alert alert={alert}/>
 <div className="container my-3">
 <Routes>
-  <Route path='/'element={<TextForm heading="Enter the text to analyze below" mode={mode} 
+  <Route path='/React_with_Harry/'element={<TextForm heading="TextUtils - Word Counter, Character Counter, Remove extra Spaces" mode={mode} 
 showAlert={showAlert}/>}/> 
-  <Route path="/about" element={<About/>}/>
-{/* <About/> */}
+  <Route path="/React_with_Harry/about" element={<About mode={mode}/>}/>
+
 </Routes>
 </div>
 </Router>
-{/* /** /users --> Component 1
- /users/home --> -->  Component2
- mybe it is not used anymore */ }
+
  </>
   )
 }
