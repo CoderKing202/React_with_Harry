@@ -1,13 +1,15 @@
 import './App.css'
 import React, { Component } from 'react'
-
-export default class App extends Component {
-  c = "John"
-  render() {
-    return (
-      <div>
-        This is my first Class based component {this.c}
-      </div>
-    )
-  }
+import NavBar from './components/Navbar'
+import News from './components/News'
+//Teacher is doing in class way but i will do it in functional component way
+function App() {
+  return (
+    <div>
+      <NavBar/>
+      <News/>
+    </div>
+  )
 }
+
+export default App
