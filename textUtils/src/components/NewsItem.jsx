@@ -7,11 +7,11 @@ let  {title,description, imageUrl,newsUrl} = props
   return (
     <div className='my-3'>  
     <div className="card" style={{width: '18rem'}}>
-  <img src={imageUrl} className="card-img-top" alt="..."/>
+  <img src={imageUrl?imageUrl:"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F009%2F796%2F821%2Foriginal%2Fhouse-not-available-on-white-background-not-available-sign-not-available-label-flat-style-vector.jpg&f=1&nofb=1&ipt=c57db91cac7a63b7dfffc3727daff5bb2cdc85017a58872cfa5ffe56cc6893ae"} className="card-img-top" alt="..."/>
    <div className="card-body">
-    <h5 className="card-title">{title}</h5>
-    <p className="card-text">{description}</p>
-    <a href="/newsdetail" className="btn btn-sm btn-primary">Read More</a>
+    <h5 className="card-title">{title}...</h5>
+    <p className="card-text">{description}...</p>
+    <a href={newsUrl} target="_blank" className="btn btn-sm btn-primary">Read More</a>
   </div>
 </div>
     </div>
