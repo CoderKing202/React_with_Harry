@@ -2,8 +2,12 @@ import React, { useEffect } from 'react'
 import NewsItem from './NewsItem'
 import { useState } from 'react'
 import Spinner from './Spinner'
+import { string } from 'prop-types'
 
 function News(props) {
+  const capitalizeFirstLetter = (string) =>{
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
   const [loading, setLoading] = useState(false)
   const [page,setPage] = useState(1)
   const [news,setNews] = useState([])
@@ -11,7 +15,7 @@ function News(props) {
   const {pageSize, country="us",category="science"} = props// default values in destruction
   useEffect( ()=>{
   updateNews()
-  
+  document.title = `${capitalizeFirstLetter(category)}- NewsMonkey`
 },[page])
 const updateNews = async ()=>{
   
@@ -39,7 +43,7 @@ const handleNextClick = async ()=>{
 
 
   return<div className="container my-3">
-      <h1 className='text-center' style={{margin:'35px 0px'}}>NewsMonkey - Top Headlines</h1>
+      <h1 className='text-center' style={{margin:'35px 0px'}}>NewsMonkey - Top {capitalizeFirstLetter(category)} Headlines</h1>
       { loading && <Spinner/>}
       <div className="row">
       {!loading && news.map((element)=>{
