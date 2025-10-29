@@ -3,6 +3,7 @@ import NewsItem from './NewsItem'
 import { useState } from 'react'
 import Spinner from './Spinner'
 import { string } from 'prop-types'
+import InfiniteScroll from "react-infinite-scroll-component"
 
 function News(props) {
   const capitalizeFirstLetter = (string) =>{
@@ -24,7 +25,7 @@ const updateNews = async ()=>{
   let data = await fetch(url)  
   let parsedData = await data.json()
   setTotalResult(parsedData.totalResults)
-  setNews(parsedData.articles)
+  setNews(news.concat(parsedData.articles))
   setLoading(false)
   console.log(page)
 }
@@ -40,13 +41,32 @@ const handleNextClick = async ()=>{
   }
 
 }
-
-
-  return<div className="container my-3">
+const fetchMoreData = async ()=>{
+  setPage(page+1)
+  // const  url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=28df2a883ac44eedb7ef9cdac2329fa1&country=${country}&page=${page}&pageSize=${pageSize}`
+  // setLoading(true)
+  // let data = await fetch(url)  
+  // let parsedData = await data.json()
+  // setTotalResult(parsedData.totalResults)
+  // setNews(news.concat(parsedData.articles))
+  // setLoading(false)
+  // console.log(page)
+}
+return (<>
       <h1 className='text-center' style={{margin:'35px 0px'}}>NewsMonkey - Top {capitalizeFirstLetter(category)} Headlines</h1>
       { loading && <Spinner/>}
-      <div className="row">
-      {!loading && news.map((element)=>{
+      
+      <InfiniteScroll
+    dataLength={news.length}
+    next={fetchMoreData}
+    style={{ }} //To put endMessage and loader to the top.
+    hasMore={news.length != totalResult}
+    loader={<Spinner/>}
+    
+  >
+    <div className="container">
+    <div className="row">
+    {news.map((element)=>{
         return <div className="col md-3" key={element.url}>
         <NewsItem  title={element.title} description={element.description} 
         imageUrl={element.urlToImage}
@@ -54,17 +74,15 @@ const handleNextClick = async ()=>{
         author={element.author}
         date={element.publishedAt}
         source = {element.source.name}
-  />
+  /> </div>
+   
   
-        </div>
       })}
       </div>
-      <div className="container d-flex justify-content-between">
-      <button disabled={page<=1} type="button" className="btn btn-dark" onClick={handlePrevClick}> &larr; Previous</button>
-      <button disabled={page + 1 >= Math.ceil(totalResult/pageSize)} type="button" className="btn btn-dark" onClick={handleNextClick}>Next &rarr;</button>
       </div>
+  </InfiniteScroll>
       
-    </div>
+  </>)
     }
 
 export default News
