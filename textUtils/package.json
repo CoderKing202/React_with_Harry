@@ -48,7 +48,10 @@
   "react-infinite-scroll-component": "^6.1.0",
   
     
-  "react-router-dom": "^7.9.4"
+  "react-router-dom": "^7.9.4",
+  
+    
+  "react-top-loading-bar": "^3.0.2"
   
   },
   

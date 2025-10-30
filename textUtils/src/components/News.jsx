@@ -5,6 +5,7 @@ import Spinner from './Spinner'
 import { string } from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component"
 
+
 function News(props) {
   const capitalizeFirstLetter = (string) =>{
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -19,15 +20,19 @@ function News(props) {
   document.title = `${capitalizeFirstLetter(category)}- NewsMonkey`
 },[page])
 const updateNews = async ()=>{
-  
+  props.setProgress(10)
   const  url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=28df2a883ac44eedb7ef9cdac2329fa1&country=${country}&page=${page}&pageSize=${pageSize}`
+  if(page == 1)
   setLoading(true)
   let data = await fetch(url)  
+  props.setProgress(30)
   let parsedData = await data.json()
   setTotalResult(parsedData.totalResults)
+  console.log(news.length)
+  console.log(parsedData.totalResults)
   setNews(news.concat(parsedData.articles))
   setLoading(false)
-  console.log(page)
+  props.setProgress(100)
 }
 const handlePrevClick = async ()=>{
     setPage( page - 1 )
@@ -37,7 +42,6 @@ const handleNextClick = async ()=>{
     if( !(page + 1 >= Math.ceil(totalResult/pageSize)) ) 
     {
     setPage( page + 1 )
-    
   }
 
 }
@@ -59,7 +63,6 @@ return (<>
       <InfiniteScroll
     dataLength={news.length}
     next={fetchMoreData}
-    style={{ }} //To put endMessage and loader to the top.
     hasMore={news.length != totalResult}
     loader={<Spinner/>}
     
