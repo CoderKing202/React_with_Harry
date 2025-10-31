@@ -14,14 +14,14 @@ function News(props) {
   const [page,setPage] = useState(1)
   const [news,setNews] = useState([])
   const [totalResult,setTotalResult] = useState(0)
-  const {pageSize, country="us",category="science"} = props// default values in destruction
+  const {pageSize, country="us",category="science", apiKey} = props// default values in destruction
   useEffect( ()=>{
   updateNews()
   document.title = `${capitalizeFirstLetter(category)}- NewsMonkey`
 },[page])
 const updateNews = async ()=>{
   props.setProgress(10)
-  const  url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=28df2a883ac44eedb7ef9cdac2329fa1&country=${country}&page=${page}&pageSize=${pageSize}`
+  const  url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=${apiKey}&country=${country}&page=${page}&pageSize=${pageSize}`
   if(page == 1)
   setLoading(true)
   let data = await fetch(url)  
