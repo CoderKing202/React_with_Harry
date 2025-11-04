@@ -34,17 +34,7 @@ const updateNews = async ()=>{
   setLoading(false)
   props.setProgress(100)
 }
-const handlePrevClick = async ()=>{
-    setPage( page - 1 )
-    
-} 
-const handleNextClick = async ()=>{
-    if( !(page + 1 >= Math.ceil(totalResult/pageSize)) ) 
-    {
-    setPage( page + 1 )
-  }
 
-}
 const fetchMoreData = async ()=>{
   setPage(page+1)
   // const  url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=28df2a883ac44eedb7ef9cdac2329fa1&country=${country}&page=${page}&pageSize=${pageSize}`
@@ -57,7 +47,7 @@ const fetchMoreData = async ()=>{
   // console.log(page)
 }
 return (<>
-      <h1 className='text-center' style={{margin:'35px 0px'}}>NewsMonkey - Top {capitalizeFirstLetter(category)} Headlines</h1>
+      <h1 className='text-center' style={{margin:'67px 0px 0px 0px'}}>NewsMonkey - Top {capitalizeFirstLetter(category)} Headlines</h1>
       { loading && <Spinner/>}
       
       <InfiniteScroll
