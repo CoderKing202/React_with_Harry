@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
-const userSchema = new Schema({
+
+const userSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
     },
-    
     email:{
         type:String,
         required:true,
-        unique:true
+        // unique:true
     },
     password:{
         type:String,
@@ -18,6 +18,5 @@ const userSchema = new Schema({
         type:Date,
         default:Date.now//function run when a new document will be inserted 
     },
-    
   });
-  module.exports = mongoose.model('user',userSchema)
+  module.exports = mongoose.model('users',userSchema)
