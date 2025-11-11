@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        // unique:true
+        unique:true
     },
     password:{
         type:String,
@@ -19,4 +19,6 @@ const userSchema = new mongoose.Schema({
         default:Date.now//function run when a new document will be inserted 
     },
   });
-  module.exports = mongoose.model('users',userSchema)
+  const User = mongoose.model('users',userSchema)
+  User.createIndexes()// not needed when it is done by default as we add unique:true in any field
+  module.exports = User
