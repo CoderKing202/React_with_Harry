@@ -66,6 +66,7 @@ router.post(
   }
 );
 
+
 //ROUTE 2: Authenticate a User using: POST "/api/auth/login" No login required
 router.post(
   "/login",
@@ -107,6 +108,8 @@ router.post(
     }
   }
 );
+
+
 //ROUTE 3: Get loggedin User Details using: POST "/api/auth/getuser" Login required
 router.post("/getuser", fetchuser,async (req, res) => {
   try {
